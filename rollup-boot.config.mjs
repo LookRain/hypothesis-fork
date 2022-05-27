@@ -12,6 +12,7 @@ if (isProd) {
   prodPlugins.push(terser());
 }
 
+console.log('booting up rolluop script');
 const { version } = JSON.parse(readFileSync('./package.json').toString());
 
 // URL template which is expanded by the boot script. See `src/boot/url-template.js`.
@@ -21,10 +22,12 @@ const notebookAppUrl = process.env.NOTEBOOK_APP_URL
   ? `${process.env.NOTEBOOK_APP_URL}`
   : `${localhost}:5000/notebook`;
 
-const sidebarAppUrl = process.env.SIDEBAR_APP_URL
-  ? `${process.env.SIDEBAR_APP_URL}`
-  : `${localhost}:5000/app.html`;
+const sidebarAppUrl = 'https://hypothes.is/app.html';
+// const sidebarAppUrl = process.env.SIDEBAR_APP_URL
+//   ? `${process.env.SIDEBAR_APP_URL}`
+//   : `${localhost}:5000/app.html`;
 
+console.log('sidebarAppUrl', sidebarAppUrl);
 // nb. Replace `isProd` with `false` here to test a production build of the client
 // served locally.
 const assetRoot = isProd

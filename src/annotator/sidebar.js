@@ -160,6 +160,7 @@ export class Sidebar {
       this.hypothesisSidebar = document.createElement('hypothesis-sidebar');
       const shadowRoot = createShadowRoot(this.hypothesisSidebar);
       shadowRoot.appendChild(this.iframeContainer);
+      console.log('this.hypothesisSidebar', this.hypothesisSidebar);
 
       element.appendChild(this.hypothesisSidebar);
     }
@@ -278,7 +279,7 @@ export class Sidebar {
   _connectGuest(port) {
     /** @type {PortRPC<GuestToHostEvent, HostToGuestEvent>} */
     const guestRPC = new PortRPC();
-
+    console.log('connect guest');
     guestRPC.on('textSelected', () => {
       this._guestWithSelection = guestRPC;
       this.toolbar.newAnnotationType = 'annotation';

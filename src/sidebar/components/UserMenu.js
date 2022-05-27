@@ -109,7 +109,7 @@ function UserMenu({ auth, frameSync, onLogout, settings }) {
           />
           {!isThirdParty && (
             <MenuItem
-              label="Account settings"
+              label="Account settingasdfasdfs"
               href={store.getLink('account.settings')}
             />
           )}

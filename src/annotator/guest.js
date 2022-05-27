@@ -294,6 +294,7 @@ export class Guest {
       this._integration.uri(),
       this._integration.getMetadata(),
     ]);
+    console.log('~~~~~~~~~~~', uri, metadata);
 
     return {
       uri: normalizeURI(uri),
@@ -427,7 +428,10 @@ export class Guest {
     this._sidebarRPC.on(
       'loadAnnotations',
       /** @param {AnnotationData[]} annotations */
-      annotations => annotations.forEach(annotation => this.anchor(annotation))
+      annotations => {
+        console.log('@#$@#$@#$', annotations);
+        return annotations.forEach(annotation => this.anchor(annotation));
+      }
     );
 
     // Connect to sidebar and send document info/URIs to it.
@@ -612,8 +616,8 @@ export class Guest {
   async createAnnotation({ highlight = false } = {}) {
     const ranges = this.selectedRanges;
     this.selectedRanges = [];
-
     const info = await this.getDocumentInfo();
+
     const root = this.element;
     const rangeSelectors = await Promise.all(
       ranges.map(range => this._integration.describe(root, range))
@@ -641,7 +645,7 @@ export class Guest {
     // Removing the text selection triggers the `SelectionObserver` callback,
     // which causes the adder to be removed after some delay.
     removeTextSelection();
-
+    console.log(annotation);
     return annotation;
   }
 

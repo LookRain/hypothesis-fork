@@ -157,7 +157,7 @@ export default function AdderToolbar({
         <ToolbarButton
           icon="annotate"
           onClick={() => onCommand('annotate')}
-          label="Annotate"
+          label="Annotatsdfge"
           shortcut={annotateShortcut}
         />
         <ToolbarButton

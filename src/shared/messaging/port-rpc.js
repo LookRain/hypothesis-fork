@@ -244,6 +244,8 @@ export class PortRPC {
    * @param {MessagePort} port
    */
   connect(port) {
+    console.log('connecting', port);
+    // return;
     this._port = port;
     this._listeners.add(port, 'message', event => this._handle(event));
     port.start();
@@ -259,6 +261,8 @@ export class PortRPC {
    * Disconnect the RPC channel and close the MessagePort.
    */
   destroy() {
+    console.log('connecting', port);
+    // return;
     if (this._port) {
       sendCall(this._port, 'close');
       this._port.close();
@@ -280,6 +284,7 @@ export class PortRPC {
    * @param {unknown[]} args
    */
   call(method, ...args) {
+    console.log(method, ...args);
     if (!this._port) {
       this._pendingCalls.push([method, args]);
     }
