@@ -43,16 +43,17 @@ export function processUrlTemplate(url, document_ = document) {
     // Not a template. This should always be the case in production.
     return url;
   }
-
+  console.log(url, document_);
   const origin = currentScriptOrigin(document_);
+  console.log('origin', origin);
 
   if (origin) {
     url = url.replace('{current_host}', origin.hostname);
     url = url.replace('{current_scheme}', origin.protocol);
   } else {
-    throw new Error(
-      'Could not process URL template because script origin is unknown'
-    );
+    // throw new Error(
+    //   'Could not process URL template because script origin is unknown!'
+    // );
   }
 
   return url;

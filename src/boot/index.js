@@ -24,7 +24,7 @@ if (isBrowserSupported()) {
     parseJsonConfig(document)
   );
   const assetRoot = processUrlTemplate(config.assetRoot || '__ASSET_ROOT__');
-
+  console.log('assetRoot', assetRoot);
   // Check whether this is the sidebar app (indicated by the presence of a
   // `<hypothesis-app>` element) and load the appropriate part of the client.
   if (document.querySelector('hypothesis-app')) {

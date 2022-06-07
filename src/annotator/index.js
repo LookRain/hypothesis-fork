@@ -69,23 +69,23 @@ function init() {
     const removeWorkaround = installPortCloseWorkaroundForSafari();
     destroyables.push({ destroy: removeWorkaround });
 
-    const sidebarConfig = /** @type {SidebarConfig} */ (getConfig('sidebar'));
+    // const sidebarConfig = /** @type {SidebarConfig} */ (getConfig('sidebar'));
 
-    const hypothesisAppsOrigin = new URL(sidebarConfig.sidebarAppUrl).origin;
-    const portProvider = new PortProvider(hypothesisAppsOrigin);
+    // const hypothesisAppsOrigin = new URL(sidebarConfig.sidebarAppUrl).origin;
+    // const portProvider = new PortProvider(hypothesisAppsOrigin);
 
-    const eventBus = new EventBus();
-    const sidebar = new Sidebar(document.body, eventBus, sidebarConfig);
-    const notebook = new Notebook(
-      document.body,
-      eventBus,
-      /** @type {NotebookConfig} */ (getConfig('notebook'))
-    );
+    // const eventBus = new EventBus();
+    // const sidebar = new Sidebar(document.body, eventBus, sidebarConfig);
+    // const notebook = new Notebook(
+    //   document.body,
+    //   eventBus,
+    //   /** @type {NotebookConfig} */ (getConfig('notebook'))
+    // );
 
-    portProvider.on('frameConnected', (source, port) =>
-      sidebar.onFrameConnected(source, port)
-    );
-    destroyables.push(portProvider, sidebar, notebook);
+    // portProvider.on('frameConnected', (source, port) =>
+    //   sidebar.onFrameConnected(source, port)
+    // );
+    // destroyables.push(portProvider, sidebar, notebook);
   }
 
   const vsFrameRole = vitalSourceFrameRole();
@@ -101,6 +101,8 @@ function init() {
     // Create the guest that handles creating annotations and displaying highlights.
     const guest = new Guest(document.body, annotatorConfig, hostFrame);
     destroyables.push(hypothesisInjector, guest);
+    guest.loadAnnotations();
+    guest.setHighlightsVisible(true);
   }
 
   sidebarLinkElement.addEventListener('destroy', () => {
