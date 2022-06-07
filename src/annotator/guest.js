@@ -201,7 +201,7 @@ export class Guest {
      * @type {PortRPC<HostToGuestEvent, GuestToHostEvent>}
      */
     this._hostRPC = new PortRPC();
-    this._connectHost(hostFrame);
+    // this._connectHost(hostFrame);
 
     /**
      * Channel for guest-sidebar communication.
@@ -209,7 +209,7 @@ export class Guest {
      * @type {PortRPC<SidebarToGuestEvent, GuestToSidebarEvent>}
      */
     this._sidebarRPC = new PortRPC();
-    this._connectSidebar();
+    // this._connectSidebar();
 
     this._bucketBarClient = new BucketBarClient({
       contentContainer: this._integration.contentContainer(),
@@ -598,6 +598,7 @@ export class Guest {
    */
   _updateAnchors(anchors, notify) {
     this.anchors = anchors;
+
     if (notify) {
       this._bucketBarClient.update(this.anchors);
     }
@@ -780,5 +781,21 @@ export class Guest {
    */
   get focusedAnnotationTags() {
     return this._focusedAnnotations;
+  }
+  loadAnnotations() {
+    // const tempAnnos = JSON.parse(localStorage.getItem('demo-annos'));
+    // tempAnnos.forEach(annotation => this.anchor(annotation));
+    window.addEventListener('message', event => {
+      if (event.data.source === 'commoncorg-ext-bg') {
+        console.log('from ext bg', event.data);
+        if (event.data.annotations) {
+          event.data.annotations.forEach(annotation => this.anchor(annotation));
+        }
+      }
+    });
+    window.postMessage({
+      source: 'commoncorg-hypothesis',
+      type: 'CLIENT_READY',
+    });
   }
 }
