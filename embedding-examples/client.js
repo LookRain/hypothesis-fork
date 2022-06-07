@@ -2,7 +2,7 @@
 // Change this to https://hypothes.is/ for the public Hypothesis service.
 
 export const CLIENT_ORIGIN = 'https://hypothes.is/';
-//export const CLIENT_ORIGIN = 'https://hypothes.is';
+// export const CLIENT_ORIGIN = 'http://localhost:5000/';
 
 export function loadClient() {
   const src = `${CLIENT_ORIGIN}/embed.js`;
